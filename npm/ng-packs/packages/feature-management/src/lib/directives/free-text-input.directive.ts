@@ -1,12 +1,9 @@
 import { Directive, HostBinding, Input } from '@angular/core';
+import { IStringValueType } from 'packages/feature-management/proxy/src/lib/proxy/validation/string-values';
 
 // TODO: improve this type
 export interface FreeTextType {
-  valueType: {
-    validator: {
-      name: string;
-    };
-  };
+  valueType: IStringValueType
 }
 
 export const INPUT_TYPES = {
@@ -22,6 +19,7 @@ export const INPUT_TYPES = {
 export class FreeTextInputDirective {
   _feature: FreeTextType;
   // eslint-disable-next-line @angular-eslint/no-input-rename
+
   @Input('abpFeatureManagementFreeText') set feature(val: FreeTextType) {
     this._feature = val;
     this.setInputType();
@@ -34,7 +32,11 @@ export class FreeTextInputDirective {
   @HostBinding('type') type: string;
 
   private setInputType() {
-    const validatorType = this.feature?.valueType?.validator?.name.toLowerCase();
-    this.type = INPUT_TYPES[validatorType] ?? INPUT_TYPES.default;
+    const valueType = this._feature?.valueType;
+    if (valueType !== undefined) {
+      const validatorType = this.feature?.valueType?.validator?.name.toLowerCase();
+      this.type = INPUT_TYPES[validatorType] ?? INPUT_TYPES.default;
+    }
+    this.type = INPUT_TYPES.default;
   }
 }

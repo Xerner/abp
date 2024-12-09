@@ -14,7 +14,7 @@ import {
   TemplateRef,
   TrackByFunction,
 } from '@angular/core';
-import { AsyncPipe, formatDate, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, CommonModule, formatDate, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 
 import { Observable, filter, map } from 'rxjs';
 
@@ -68,6 +68,7 @@ const DEFAULT_ACTIONS_COLUMN_WIDTH = 150;
     AsyncPipe,
     NgTemplateOutlet,
     NgComponentOutlet,
+    CommonModule,
   ],
   templateUrl: './extensible-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

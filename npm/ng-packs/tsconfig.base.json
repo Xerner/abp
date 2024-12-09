@@ -49,5 +49,8 @@
       "@abp/nx.generators": ["packages/generators/src/index.ts"]
     }
   },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+  },
   "exclude": ["node_modules", "tmp"]
 }
